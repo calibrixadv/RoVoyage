@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Routes  , Route} from 'react-router-dom';
 
-import { Home,Quizz,CreatedRoute,CityContainer } from './Container';
+import { Home,Quizz,CreatedRoute,CityContainer,FormConatiner } from './Container';
 import { Navbar } from './Elements';
 
 import './App.scss';
@@ -17,7 +17,8 @@ function App() {
           <Route path=":id" element={<CityContainer/>}/>
         </Route>
         <Route path="/createdRoute" element={<CreatedRoute/>}/>
-        <Route index path="/" element={<Home/>}/>
+        <Route path="/form" element={<FormConatiner/>}/>
+        <Route path="/" element={<Home/>}/>
       </Routes>
 
     </BrowserRouter>

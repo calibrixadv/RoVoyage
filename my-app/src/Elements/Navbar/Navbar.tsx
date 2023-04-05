@@ -57,7 +57,6 @@ const Navbar = () => {
             window.location.reload()
         }
         else{
-            console.log("Not Found")
             isLoading(false)
         }
     }, [param])

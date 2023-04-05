@@ -14,7 +14,6 @@ export default async function(start_city_name: string,end_city_name: string){
         method:"GET",
     })
     const data=await response.text()
-    console.log(await response.ok);
     fs.writeFileSync("\output.html",data)
     return data
 }

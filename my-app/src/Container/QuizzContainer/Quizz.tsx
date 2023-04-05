@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react'
+import React, { useState, useEffect, FormEvent, ChangeEvent } from 'react'
 import {useNavigate} from "react-router-dom"
 import Cookies from 'universal-cookie';
 
@@ -15,10 +15,9 @@ const Quizz = () => {
         vehicle:"none",
         tags:[""],
         city_number:0,
-        city_start:"Galati",
+        cities:["","Bucuresti Nord"],
         max_time: 0,
-        departure_date:formatDate(new Date()),
-        city_end:"Bucuresti Nord"
+        departure_date:formatDate(new Date())
     })
     const handleChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
         const prop=event.target.name
@@ -34,6 +33,12 @@ const Quizz = () => {
     useEffect(() => {
         console.table(form)
     }, [form])
+    const handleCity=(e:ChangeEvent<HTMLInputElement>)=>{
+        const value=e.target.value;
+        let arr=form.cities;
+        arr[0]=value;
+        setForm({...form,cities:arr});
+    }
     const handleSubmit=async (e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         isLoading(true);
@@ -49,9 +54,10 @@ const Quizz = () => {
         {
             isLoading(false)
             const data=JSON.parse(await response.text())
+            console.log(data)
             const cookies=new Cookies();
             cookies.remove("data")
-            cookies.set('data', data[1])
+            cookies.set('data', data)
             navigate("/createdRoute");
         }
         else alert(JSON.stringify(await response.text()))
@@ -131,7 +137,7 @@ const Quizz = () => {
            </div>
            <div className='input-ctn question-ctn'>
                <label  className='label-question' htmlFor='city_start'>Din ce oras doriti sa plecati?</label>
-               <input type='text' className="quizz-input"  name='city_start' id='city_start' onChange={handleChange}/>
+               <input type='text' className="quizz-input"  name='city_start' id='city_start' onChange={handleCity}/>
            </div>
            <div className='input-ctn question-ctn'>
                <label className='label-question' htmlFor='max_time'>Care este numarul de ore maxim pe care doriti sa il petreceti pe un drum?</label>

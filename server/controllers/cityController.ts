@@ -19,7 +19,6 @@ const getData=async(req:Request,res:Response)=>{
                 target=result
         })
     }
-    else console.log(target)
     if(!target){
         res.status(201).send(data.pages)
     }

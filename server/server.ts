@@ -1,9 +1,7 @@
 import "dotenv/config";
 import express from "express";
-import mongoose from "mongoose";
 import cors from "cors";
 
-import authRouter from "./routes/authRoutes";
 import quizzRouter from "./routes/quizzRoutes";
 import cityRouter from "./routes/cityRoutes";
 
@@ -22,8 +20,6 @@ const corsOptions = {
   credentials: true,
 }
 app.use(cors(corsOptions))
-await mongoose.connect(process.env.REACT_APP_MONGO_URL!);
-console.log("started")
 app.use(quizzRouter);
 app.use(cityRouter);
 app.listen(5555);

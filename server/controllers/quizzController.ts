@@ -3,15 +3,7 @@ import * as fs from "fs"
 import * as cheerio from "cheerio"
 import { formatDate, getTren, getAutocar } from "../api";
 interface ITrain{
-      vehicle:string,
-      city_start:string,
-      city_end:string,
-      train_name:string,
-      dep_time:string,
-      arr_time:string,
-      tr_time:string,
-      operator:string,
-      price:string
+  [key:string]:string
 }
 interface IAutocar{
       vehicle:string,
@@ -29,13 +21,22 @@ interface IAutocar{
 }
 
 const quizz_response=async(req:Request,res:Response)=>{
-    const start_city_name:"Bucuresti Nord"=req.body.city_start
-    const end_city_name:"Bucuresti Nord"=req.body.city_end;
-    const vehicle=req.body.vehicle;
+  const arr=req.body.cities
+  const vehicle=req.body.vehicle;
+  let exp:Array<Array<ITrain> | Array<IAutocar>>=[];
+  for(var i=0;i<arr.length-1;i++){
+
+    const start_city_name=arr[i]
+    const end_city_name=arr[i+1]
     if(vehicle=="tren"){
       const data=await getTren(start_city_name,end_city_name)
       if(data=="Nu sunt trenuri directe.")
+      {
         res.status(404).send("Nu sunt trenuri direct")
+        return false;
+        
+
+      }
       else{
         let found=false
 
@@ -64,11 +65,13 @@ const quizz_response=async(req:Request,res:Response)=>{
 
         let aux=json[index].price;
         json[index].price=aux.match(/Clasa \d: \d+/g)!.toString()
+        if(found)
+        {
+        exp.push(json)
+        return false;
         }
+      }
       })
-      if(found)
-        res.status(201).send(json)
-        else res.status(404).send("Nu a fost gasit un tren pentru timpul de deplasare dorit")
       }
     }
     else if(vehicle=="autocar"){
@@ -77,6 +80,7 @@ const quizz_response=async(req:Request,res:Response)=>{
       if( $("#rezultate").length===0)
       {
         res.status(404).send("Nu exista ruta directa!");
+        return false;
       }
       else{
       let found=false;
@@ -130,16 +134,25 @@ const quizz_response=async(req:Request,res:Response)=>{
             route:$(element).find(".details>.route>ol>li:nth-child(2)>.timeline-content>div").text().replaceAll(/(\n|\t)+/g,""),
             arr_location:$(element).find(".details>.route>ol>li:nth-child(3)>.timeline-content>span").text()
         })
+        if(found){
+          exp.push(json);
+        return false;
+        }
         }
       })
 
-      if(found)res.status(201).send(json)
-      else res.status(404).send("Nu a fost gasit un autocar cu timpul de deplasare dorit!")
       }
     }
     else if(req.body.vehicle=="none")
+    {
       res.status(404).send("Vehicle not specified!")
+    }
     else
       res.status(404).send("Car route not yet implemented!")
+    console.log(exp)
+    res.status(201).send(exp)
+
+
+  }
   }
 export default {quizz_response};
