@@ -1,0 +1,42 @@
+@import '../../App.scss';
+.map{
+    border-radius:2rem;
+}
+.home-h2{
+    font-size: 8rem!important;
+    color:$font-base-color
+}
+.column{
+    justify-items: center;
+}
+.home-h4{
+    color:$font-base-color
+}
+.phone-list{
+    display: none;
+}
+@media screen and (max-width:840px){
+    .phone-list{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        height: auto;
+        place-content: space-between;
+        .p-gen{
+            padding: 2rem;
+            background-color: $font-green-color;
+            border-radius: 1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            p{
+                color:$font-light-green-color
+            }
+        }
+    }
+    .map{
+        display: none;
+    }
+    
+}

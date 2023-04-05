@@ -1,0 +1,112 @@
+@import '../../App.scss';
+.route-h2,.route-h3,.route-h4{
+    text-transform: uppercase;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   margin:0;
+}
+.route-h2,.route-h3{
+    color: $font-base-color;
+}
+.route-h4{
+    color:$font-light-green-color;
+}
+.route-header{
+    width: 100%;
+}
+.image{
+    width:80%; 
+}
+.icon
+{
+    zoom: 600%;
+    color:$font-base-color;
+}
+.p-ctn{
+    margin-top: 2rem;
+}
+p,label{
+    color: $font-base-color;
+    font-size: 2rem;
+    margin: 0;
+}
+main{
+    div{
+        width: 40vw;
+    }
+}
+.ctn{
+    border: 5px solid #5E4C5A;
+    border-radius: 30px;
+    width: max-content;
+    .flex{
+        width: 100%;
+        margin-left: 0.2rem;
+        margin-right: 2vw;
+    }
+}
+dt{
+    font-size:5rem;
+    color:$font-light-green-color;
+    text-decoration:underline;
+}
+dd{
+    font-size:3rem;
+    color:$font-light-green-color;
+
+}
+.route-a{
+    margin-right: 1rem;
+    margin-left: 2vw;
+    text-decoration: none;
+    button{
+        width: 15em!important;
+        height: 10rem!important;
+    };
+    p{
+    font-size: 1.5rem;
+    }
+}
+h4{
+    font-size: 2rem;
+}
+@media screen and (max-width:1300px){
+    main{
+        flex-direction: column;
+        align-items: center;
+        div{
+            width: 80vw!important;
+            margin-bottom: 1rem;
+        }
+    }
+    h3{
+        text-align: center;
+    }
+    .reservation{
+
+        align-self: center;
+    }
+}
+@media screen and (max-width:700px) {
+    body{
+
+    overflow: hidden;
+    }
+    dt{
+        font-size: 3rem;
+    }
+    dd{
+        font-size: 2rem;
+
+    }
+    h3{
+        font-size: 5rem!important;
+    }
+
+    .ctn{
+        align-self: center;
+        padding: 0.2rem!important;
+        .flex{
+            flex-direction: column;
+        }
+    }
+}

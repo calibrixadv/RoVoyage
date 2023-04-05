@@ -1,0 +1,82 @@
+@import '../../App.scss';
+nav{
+    position: sticky;
+    width: 100vw;
+    margin: 0!important;
+
+}
+.dsk{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: 1rem;
+    .input{
+        accent-color: $font-base-color!important;
+    }
+    background-color: $font-green-color;
+}
+.nav-ctn{
+    background-color: $font-light-green-color;
+}
+.nav-btn-wrap{
+    background-color: transparent;
+    border: transparent;
+}
+.nav-icon{
+    transform: scaleX(-1);
+    background: $font-green-color;
+    border-radius: 50%;
+    padding: 0.2rem;
+    color:$font-light-green-color;
+    zoom:200%;
+}
+.nav-a{
+    align-content: center;
+    justify-content: center;
+    button{
+        margin:0;
+    }
+}
+.nav-menu{
+    display:none;
+}
+@media screen and (max-width:800px){
+    .dsk{
+        display: none!important;
+    }
+    .nav-close{
+        position: absolute;
+        top:1rem;
+        left:1rem;
+    }
+    .nav-menu-ctn{
+        position:fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: $font-green-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .nav-phn.button-primary{
+        padding: 7rem;
+        border-radius:5rem;
+    }
+    .nav-menu{
+        display: block;
+        padding: 1rem;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+
+        background-color: $font-green-color;
+        svg{
+            zoom:200%
+        }
+    }
+    
+}

@@ -1,0 +1,56 @@
+@import '../../App.scss';
+.quizz-input{
+    border: solid 4px $font-green-color;
+    border-radius:4px;
+    padding:0.5rem;
+}
+.loading{
+    color: $font-green-color;
+    zoom:300%;
+
+}
+.button-primary{
+    width:8rem;
+    height: 4rem;
+    border-radius: 20px;
+    margin-top: 1rem;
+    align-self: center;
+}
+.form-ctn{
+    padding:1rem;
+
+}
+.quizz-h3{
+    color:$font-base-color
+}
+.question-ctn{
+    width: 80vw;
+    max-width: 60rem;
+}
+.radio-ctn{
+    input{
+        margin-left:auto!important;
+        width: 1.5rem;
+    }
+}
+.label-question{
+    font-size: 3rem;
+}
+label:not(.label-question){
+    font-size: 2rem;
+    color:$font-green-color
+}
+.input-ctn{
+    display: flex;
+    flex-direction: column;
+}
+.little-input{
+    width: 2rem;
+    font-size: 1rem;
+}
+.main-ctn{
+    align-items: center;
+}
+.quizz-div{
+    align-items: baseline;
+}
