@@ -7,10 +7,18 @@ import "./Quizz.scss";
 import formatDate from '../../methods/formatDate';
 import {TbTrademark} from "react-icons/tb"
 import {IoIosRefresh} from "react-icons/io"
+import Dropbar from '../../Elements/DorpBar/Dropbar';
+import City from '../../api/City';
 
 const Quizz = () => {
     const navigate=useNavigate()
     const [loading,isLoading]=useState(false)
+    const data:{[key:string]:string}=City.data;
+    const [curr, setCurr] = useState("")
+    const [toggle, setToggle] = useState(false)
+    const handleClick=(e:React.MouseEvent<HTMLButtonElement>)=>{
+        setToggle(!toggle)
+    }
     const [form, setForm] = useState({
         vehicle:"none",
         tags:[""],
@@ -33,8 +41,10 @@ const Quizz = () => {
     useEffect(() => {
         console.table(form)
     }, [form])
-    const handleCity=(e:ChangeEvent<HTMLInputElement>)=>{
-        const value=e.target.value;
+    const handleCity=(e:React.MouseEvent<HTMLButtonElement>)=>{
+        setCurr(e.currentTarget.innerHTML)
+        setToggle(!toggle)
+        const value=e.currentTarget.innerHTML;
         let arr=form.cities;
         arr[0]=value;
         setForm({...form,cities:arr});
@@ -45,7 +55,7 @@ const Quizz = () => {
         const response=await fetch("http://localhost:5555/quizz-response",{
             method:"POST",
             headers: {
-                    "Content-Type": "application/json",
+                    "content-type": "application/json",
                 },
             body:JSON.stringify(form)
         })
@@ -137,11 +147,12 @@ const Quizz = () => {
            </div>
            <div className='input-ctn question-ctn'>
                <label  className='label-question' htmlFor='city_start'>Din ce oras doriti sa plecati?</label>
-               <input type='text' className="quizz-input"  name='city_start' id='city_start' onChange={handleCity}/>
+                    <button onClick={handleClick}>{curr == "" ? "Select a city" : curr}</button>
+                    {toggle == true ? Object.values(data).map((value)=>(<button type='button' onClick={handleCity}>{value}</button>)) : <></>}
            </div>
            <div className='input-ctn question-ctn'>
                <label className='label-question' htmlFor='max_time'>Care este numarul de ore maxim pe care doriti sa il petreceti pe un drum?</label>
-               <input className="little-input quizz-input" type='number'onChange={handleChange} name='max_time' id='max_time'  min="1"/>
+               <input className="little-input quizz-input" required type='number'onChange={handleChange} name='max_time' id='max_time'  min="1"/>
             </div>
            <div className='input-ctn question-ctn'>
                <label className='label-question' htmlFor='date'>in ce data doriti sa plecati??</label>

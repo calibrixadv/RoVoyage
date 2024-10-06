@@ -20,7 +20,7 @@ const data:IData={
 "CV":	"Sfântu_Gheorghe",	
 "DB":	"Târgovişte",	
 "DJ":	"Craiova",	
-"GL":	"Galaţi",	
+"GL":	"Galati",	
 "GR":	"Giurgiu",	
 "GJ":	"Târgu_Jiu",	
 "HR":	"Miercurea_Ciuc",	

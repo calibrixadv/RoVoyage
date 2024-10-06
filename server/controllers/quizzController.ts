@@ -1,7 +1,7 @@
 import {Request,Response} from "express"
 import * as fs from "fs"
 import * as cheerio from "cheerio"
-import { formatDate, getTren, getAutocar } from "../api";
+import { getTren, getAutocar } from "../api";
 interface ITrain{
   [key:string]:string
 }
@@ -109,7 +109,7 @@ const quizz_response=async(req:Request,res:Response)=>{
           
          let arrtime="00:00",deptime="00:00"
          try{
-          const a=$(element).find(".result-wrap>div.pachet>.ora").text().replaceAll(/(\n|\t)+)/g,"")
+          const a=$(element).find(".result-wrap>div.pachet>.ora").text().replaceAll(/(\n|\t)+\)/g,"")
           const b=$(element).find(".result-wrap>div.ora-s").text().replaceAll(/(\n|\t)+/g,"")
           if(a!=="")
           arrtime=a;
@@ -146,9 +146,13 @@ const quizz_response=async(req:Request,res:Response)=>{
     else if(req.body.vehicle=="none")
     {
       res.status(404).send("Vehicle not specified!")
+      return
     }
     else
+    {
       res.status(404).send("Car route not yet implemented!")
+      return;
+    }
     console.log(exp)
     res.status(201).send(exp)
 

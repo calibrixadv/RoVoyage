@@ -23,3 +23,4 @@ app.use(cors(corsOptions))
 app.use(quizzRouter);
 app.use(cityRouter);
 app.listen(5555);
+export default app;
